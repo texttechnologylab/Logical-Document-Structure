@@ -1,0 +1,40 @@
+name: Character Model Document Structure
+description: A LSTM document structure model
+
+files: # assign files to reference name
+  states: states.hdf5 # state vectors for each time step
+  chars: chars.hdf5 # sequence of char ids 
+  chars_dict: chars.targ.dict # char id to utf8 char
+#  iob: iob.hdf5  # sequence of iob tag ids
+#  iob_dict: iob.targ.dict # iob tag id to iob tag
+#  cat: cat.hdf5  # sequence of category ids
+#  cat_dict: cat.targ.dict # category id to category string
+
+  
+word_sequence: # defines the character sequence
+  file: chars # HDF5 file
+  path: target # path to table within HDF5
+  dict_file: chars_dict # dictionary to map IDs from HDF5 to characters
+
+states:
+  file: states # HDF5 files containing the state for each position
+  types: [
+    {type: cell, layer: 1, path: cell1, unsigned: False}, # type={state, output}, layer=[1..x], path = HDF5 path
+    {type: hidden, layer: 1, path: hidden1, unsigned: False}, 
+  ]
+
+#meta:
+#  iob_tag:
+#    file: iob
+#    path: iob
+#    dict: iob_dict
+#    vis:
+#      type: discrete
+#      range: dict
+#  category:
+#    file: cat
+#    path: cat
+#    dict: cat_dict
+#    vis:
+#      type: discrete
+#      range: dict

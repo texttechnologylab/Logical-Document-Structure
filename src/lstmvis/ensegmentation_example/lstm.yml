@@ -1,0 +1,48 @@
+name: Character Model Document Structure
+description: A LSTM document structure model (english sentences)
+
+files: # assign files to reference name
+  states: states.hdf5 # HDF5 files have to end with .h5 or .hdf5 !!!
+  train: train.hdf5 # word ids of training set
+  words: train.dict # dict files have to end with .dict !!
+  iob: iob.hdf5  # sequence of iob tag ids
+  iob_dict: iob.dict # iob tag id to iob tag
+  cat: cat.hdf5  # sequence of category ids
+  cat_dict: cat.dict # category id to category string
+  pred: predict.hdf5  # sequence of iob tag ids
+  pred_dict: predict.dict # iob tag id to iob tag
+
+word_sequence: # defines the word sequence
+  file: train # HDF5 file
+  path: target # path to table in HDF5
+  dict_file: words # dictionary to map IDs from HDF5 to words
+
+states:
+  file: states # HDF5 files containing the state for each position
+  types: [
+    {type: cell, layer: 1, path: cell1, unsigned: False}, # type={state, output}, layer=[1..x], path = HDF5 path
+    {type: hidden, layer: 1, path: hidden1, unsigned: False}, 
+  ]
+
+meta:
+  iob_pred:
+    file: pred
+    path: target
+    dict: pred_dict
+    vis:
+      type: discrete
+      range: dict
+  iob_tag:
+    file: iob
+    path: target
+    dict: iob_dict
+    vis:
+      type: discrete
+      range: dict
+  category:
+    file: cat
+    path: target
+    dict: cat_dict
+    vis:
+      type: discrete
+      range: dict
