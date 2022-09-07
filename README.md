@@ -1,3 +1,5 @@
+[![version](https://img.shields.io/github/license/texttechnologylab/UIMATypeSystem)]()
+
 # Logical-Document-Structure
 
 Logical Document Structure Segmentation via Keras character-based LSTM Architecture.
